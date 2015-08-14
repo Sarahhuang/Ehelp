@@ -59,14 +59,14 @@ public class ContactlistActivity extends AIActionBarActivity implements RapidFlo
 
 	private Toolbar mToolbar;
 
-	private int emp,emp_;//判断是从哪个地方跳入到此页面的，1为爱心币转朋友，0为通讯录
+	private int para,para_;//判断是从哪个地方跳入到此页面的，1为爱心币转朋友，0为通讯录
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent intent =  getIntent();
-		emp = intent.getIntExtra("extra", 0);//默认0
-		emp_ = intent.getIntExtra("coin", 0);//从CoinActivity传入的爱心币数
+		para = intent.getIntExtra("extra", -1);//默认0
+		para_ = intent.getIntExtra("coin", 0);//从CoinActivity传入的爱心币数
 		initView();
 		init();//fab
 		Drawcontactlist();
@@ -328,7 +328,7 @@ public class ContactlistActivity extends AIActionBarActivity implements RapidFlo
 					} else {
 						int id = jO.getInt("id");
 						String name = jO.getString("name");
-						if (emp == 0) { //判断是从通讯录跳转过来的还是转账跳转来的，0为通讯录
+						if (para == 0) { //判断是从通讯录跳转过来的还是转账跳转来的，0为通讯录
 							int type;
 							//判断是紧急联系人还是好友
 							if (arg2 == 0) {
@@ -344,13 +344,13 @@ public class ContactlistActivity extends AIActionBarActivity implements RapidFlo
 							Intent intent = new Intent(ContactlistActivity.this, TransferActivity.class);
 							intent.putExtra("id", id);
 							intent.putExtra("name", name);
-							intent.putExtra("coin", emp_);//用户的爱心币数
+							intent.putExtra("coin", para_);//用户的爱心币数
 							startActivity(intent);
 						}
-						Intent intent = new Intent(ContactlistActivity.this, messageActivity.class);
-						//intent.putExtra("type",type);
-						intent.putExtra("id",id);
-						startActivity(intent);
+//						Intent intent = new Intent(ContactlistActivity.this, messageActivity.class);
+//						//intent.putExtra("type",type);
+//						intent.putExtra("id",id);
+//						startActivity(intent);
 					}
 				}catch (JSONException e) {
 					e.printStackTrace();

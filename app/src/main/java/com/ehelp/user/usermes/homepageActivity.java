@@ -17,7 +17,6 @@ import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -767,7 +766,9 @@ public class homepageActivity extends AIActionBarActivity implements AbsListView
                             public void onClick(View arg0) {
                                 if (SignIn()) {
                                     EsignIn.setText("已签到");
+                                    data.set(3, "积  分    " + (score + 100));
                                 }
+                                adapter.notifyDataSetChanged();
                             }
                         });
                     } else {
